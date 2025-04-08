@@ -1,8 +1,5 @@
 ---
-import "../styles/global.css";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-
+import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "Sobre mi";
 
 const identity = {
@@ -51,31 +48,28 @@ const textCase = "lowercase";
     </style>
   </head>
   <body>
-    <Header />
+    <BaseLayout pageTitle={pageTitle}>
+      <p>He aquí algunos datos sobre mí:</p>
+      <ul>
+        <li>Me llamo {identity.firstName}.</li>
+        <li>
+          Vivo en {identity.country} y trabajo como {identity.occupation}.
+        </li>
+        <li>
+          Mis pasatiempos son: {
+            identity.hobbies.map((hobby) => <span>{hobby}, </span>)
+          }
+        </li>
+      </ul>
+      <p>Mis habilidades son:</p>
+      <ul>
+        {skills.map((skill) => <li class="skill">{skill}</li>)}
+      </ul>
+      {happy && <p>¡Estoy feliz de aprender Astro!</p>}
 
-    <h1>{pageTitle}</h1>
-    <p>He aquí algunos datos sobre mí:</p>
-    <ul>
-      <li>Me llamo {identity.firstName}.</li>
-      <li>Vivo en {identity.country} y trabajo como {identity.occupation}.</li>
-      <li>
-        Mis pasatiempos son: {
-          identity.hobbies.map((hobby) => <span>{hobby}, </span>)
-        }
-      </li>
-    </ul>
-    <p>Mis habilidades son:</p>
-    <ul>
-      {skills.map((skill) => <li class="skill">{skill}</li>)}
-    </ul>
-    {happy && <p>¡Estoy feliz de aprender Astro!</p>}
+      {finished && <p>¡He terminado este tutorial!</p>}
 
-    {finished && <p>¡He terminado este tutorial!</p>}
-
-    {!finished && goal === 3 && <p>Mi objetivo es terminar en 3 días.</p>}
-    <Footer />
-    <script>
-      import "../scripts/menu";
-    </script>
+      {!finished && goal === 3 && <p>Mi objetivo es terminar en 3 días.</p>}
+    </BaseLayout>
   </body>
 </html>
