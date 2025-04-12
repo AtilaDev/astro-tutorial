@@ -2,4 +2,15 @@
 const { url, title } = Astro.props;
 ---
 
-<li><a href={url}>{title}</a></li>
+<li class="blog-post"><a href={url} class="item">{title}</a></li>
+
+<style>
+  .blog-post {
+    list-style: none;
+  }
+  .blog-post::before {
+    content: "▶";
+    margin-right: 0.5rem;
+    font-size: 0.6rem;
+  }
+</style>
